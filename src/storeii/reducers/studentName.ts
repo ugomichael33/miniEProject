@@ -11,7 +11,7 @@ const Reducer = (state: string = initialState, action: Action): string => {
         case ActionType.CLEAR_STUDENT_NAME:
             return ''
         default:
-            return state
+            return state  
     }
 }
 

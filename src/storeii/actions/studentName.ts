@@ -8,7 +8,7 @@ interface SetStudentNameAction {
     payload: string
 }
 
-interface clearStudentNameAction {
+interface clearStudentNameAction { 
     type: ActionType.CLEAR_STUDENT_NAME,
 }
 

@@ -1,42 +1,34 @@
-import React, { FC } from 'react'
-import { useDispatch, useStore } from 'react-redux'
-import { setStudentName } from '../storeii/utils'
-
-
-// onclick on a search button 
-// onclick calls a functions
-// d function calls the airtable api and takes students name as parameter
-// if successful, gets data
-// if fails, throws an error
-// data updates the state
+import { useDispatch,  useSelector } from 'react-redux'
+import { setStudentName, getStudentClasses, setIsLoggedIn, clearStudentName } from '../storeii/utils'
 
 
 const SearchForm = () => {
-  const store = useStore()
+  const studentName = useSelector((state:any)=> state.studentName)
   const dispatch = useDispatch()
-  const {studentName} = store.getState() as any
-  console.log('student',store.getState())
-
 
   const handleChange = (e:any) => {
     const value = e.target.value
     setStudentName(dispatch)(value)
-
   }
 
-
-  const handleSearch = () => {
-    //findStudentsClasses(studentsName)
+  const handleSearch = (studentName: any) => {
+    getStudentClasses(dispatch)(studentName)
+    clearStudentName(dispatch)()
+    setIsLoggedIn(dispatch)()
   }
 
   return (
-    <div>
-      <label>Student Name:</label>
-      <input onChange={handleChange} />
+    <div className='search'>
+      <div className='search-input'>
+        <label style={{whiteSpace: 'nowrap'}}>Student Name:</label>
+        <input onChange={handleChange} value={studentName}/>
+      </div>
       <button onClick={handleSearch}>login</button>
     </div>
   )
 }
 
 
+
 export default SearchForm
+
